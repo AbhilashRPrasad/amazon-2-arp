@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Banner from "../components/Banner";
-import Header from "../components/Header";
-import ProductFeed from "../components/ProductFeed";
+import Banner from "../Components/Banner";
+import Header from "../Components/Header";
+import ProductFeed from "../Components/ProductFeed";
 
 export default function Home({products}) {
   return (
