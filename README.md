@@ -22,3 +22,4 @@ Run commands
 
 3) ```yarn run dev```
 
+Hosted link - https://amazon-2-arp.vercel.app/
