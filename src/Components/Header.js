@@ -5,7 +5,8 @@ import {
     SearchIcon,
     ShoppingCartIcon,
 } from "@heroicons/react/outline";
-import {signIn, signOut, useSession} from 'next-auth/client';
+import {signIn, signOut, useSession} from 'next-auth/react';
+
 
 export default function Header() {
     return (
