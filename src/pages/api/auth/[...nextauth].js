@@ -10,6 +10,6 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  secret: "b5eb33c70bf8ad40988427a479fb916e",
+  secret: "b5eb33c70bf8ad40988427a479fb916e", //next-auth v4 u need to add secret code
 };
 export default NextAuth(authOptions);
