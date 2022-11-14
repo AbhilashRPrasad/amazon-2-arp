@@ -5,5 +5,13 @@ const firebaseConfig = {
   projectId: "amzn-2-arp",
   storageBucket: "amzn-2-arp.appspot.com",
   messagingSenderId: "271515757995",
-  appId: "1:271515757995:web:8d425f1b4577c2201736ee"
+  appId: "1:271515757995:web:8d425f1b4577c2201736ee",
 };
+
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const db = app.firestore();
+
+export default db;
