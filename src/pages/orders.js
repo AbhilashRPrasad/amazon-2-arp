@@ -1,8 +1,9 @@
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
 import Header from "../Components/Header";
-import { moment } from "moment";
+import moment, * as moments from "moment";
 import db from "../../firebase";
+import Order from "../Components/Order";
 
 function Orders({ orders }) {
   const { data: session } = useSession();
@@ -18,14 +19,24 @@ function Orders({ orders }) {
         </h1>
 
         {session ? (
-          <h2>x Orders</h2>
+          <h2>{orders.length} Orders</h2>
         ) : (
           <h2>Please Sign in to see your orders</h2>
         )}
         <div className="mt-5 space-y-4">
-          {/* {orders?.map((order) => (
-            <Order />
-          ))} */}
+          {orders?.map(
+            ({ id, amount, amountShipping, items, timestamp, images }) => (
+              <Order
+                key={id}
+                id={id}
+                amount={amount}
+                amountShipping={amountShipping}
+                items={items}
+                timestamp={timestamp}
+                images={images}
+              />
+            )
+          )}
         </div>
       </main>
     </div>
@@ -45,21 +56,21 @@ export async function getServerSideProps(context) {
       props: {},
     };
   }
-  console.log("1st check");
+
   //  from firebase DB
   const stripeOrders = await db
     .collection("users")
     .doc(session.user.email)
     .collection("orders")
-    .orderBy("timeStamp", "desc")
+    .orderBy("timestamp", "desc")
     .get();
-  console.log("firebase DB running");
+
   // Stripe Orders
   const orders = await Promise.all(
     stripeOrders.docs.map(async (order) => ({
       id: order.id,
       amount: order.data().amount,
-      amountShipping: order.data().amoount_shipping,
+      amountShipping: order?.data()?.amount_shipping,
       images: order.data().images,
       timestamp: moment(order.data().timestamp.toDate()).unix(),
       items: (
@@ -69,12 +80,9 @@ export async function getServerSideProps(context) {
       ).data,
     }))
   );
-  console.log("stripe running");
-
   return {
     props: {
       orders,
     },
   };
 }
-console.log("orders returned");
