@@ -1,6 +1,7 @@
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Banner from "../Components/Banner";
+import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import ProductFeed from "../Components/ProductFeed";
 
@@ -20,6 +21,7 @@ export default function Home({ products }) {
         {/* ProductFeed */}
         <ProductFeed products={products} />
       </main>
+      <Footer />
     </div>
   );
 }
