@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import mypic from "../img/amz2.png";
 import {
   MenuIcon,
   SearchIcon,
@@ -21,7 +22,7 @@ export default function Header() {
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
-            src="https://links.papareact.com/f90"
+            src={mypic}
             width={150}
             height={40}
             objectFit="contain"
